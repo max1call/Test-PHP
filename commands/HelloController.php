@@ -24,10 +24,6 @@ use app\models\TimeForm;
  */
 class HelloController extends Controller
 {
-//    public static $birthDay;
-//    public static $birthHour;
-//    public $birthDay;
-//    public $birthHour;
     /**
      * This command echoes what you have entered as the message.
      * @param string $message the message to be echoed.

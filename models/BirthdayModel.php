@@ -38,16 +38,13 @@ class BirthdayModel extends Model{
 		
 	$t = (time() + ($d * 24 + $h) * 60 * 60);
 
-	 return $t;
+	return $t;
     }
     
     public function sendEmail()
     {
-
 	$nextTime = $this->updateTime();
-
-	$birthBoy = $this->getBirthBoy(date('m-d', $nextTime));
-	
+	$birthBoy = $this->getBirthBoy(date('m-d', $nextTime));	
 	foreach ($birthBoy as $boy){
 	    if (isset($boy['email']) && isset($boy['name'])) {
 		$name = $boy['name'];

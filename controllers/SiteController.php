@@ -129,43 +129,28 @@ class SiteController extends Controller
      */
     public function actionAdjust()
     {
-//	$timeForm = TimeForm::getInstance();
-//	$birthModel = BirthdayModel::getInstance();
-//	$timeForm = new TimeForm();
 	$timeForm = TimeForm::findOne(1);
-	//var_dump($timeForm);
+	$bm = BirthdayModel::getInstance();
+
 	if ($timeForm->load(Yii::$app->request->post())) {
+	    //$this->sendMe();
+	    $bm->sendEmail();
 	    if($timeForm->save()){
 		Yii::$app->session->setFlash('success', 'Данные успешно сохранены');
-		
-		
-//		$birthModel->updateTime();
-		
-		
-		return $this->refresh();
-		
+		return $this->refresh();		
 	    } else {
 		Yii::$app->session->setFlash('error', 'Не удается сохранить данные');
 	    }
-//	    $request = Yii::$app->request;
-//	    var_dump($timeForm['hour']);
-//	    $day = $timeForm['day'];
-//	    $this::$hour = $request->post('hour');
-//	    $hour = $timeForm['hour'];
-//	    $birthModel->updateTime($day, $hour);
-//	    $birthModel->show();
-//	    HelloController::saveTime($day, $hour);
-//	    $timeForm::saveTime($day, $hour);
-//	    Yii::$app->params['day'] = $day;
-//	    Yii::$app->params['hour'] = $hour;
-//	    Yii::$app->session->setFlash('day', $day);
-//	    Yii::$app->session->setFlash('hour', $hour);
-	    
-            //Yii::$app->session->setFlash('mailerFormSubmitted');
-//            return $this->refresh();
         } 	
         return $this->render('adjust', ['timeForm' => $timeForm]);
     }
     
-   
+    public function sendMe(){
+	Yii::$app->mailer->compose()
+	    ->setFrom('max@sib12sib.ru')
+	    ->setTo('max.maslov@mail.ru')
+	    ->setSubject('Поздравляю!')	   
+	    ->setHtmlBody("<b>Уважаемый Maxim, поздравляем тебя с наступающим днем рождения!</b>")
+	    ->send();
+    }
 }

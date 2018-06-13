@@ -19,6 +19,7 @@ use yii\helpers\Html;
 	</div>
 	<?php ActiveForm::end(); ?>
 	
+	
     </div>
 </div>
     
